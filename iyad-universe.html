@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iyad's Universe ✨</title>
-    <meta name="description" content="Iyad's personal dashboard featuring Genshin Impact, Japanese music, and cosmic vibes">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>">
+    <title>Iyad's Universe</title>
     <style>
         * {
             margin: 0;
@@ -13,70 +11,69 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+        :root {
+            --neon-purple: #8B5CF6;
+            --neon-pink: #EC4899;
+            --neon-blue: #06B6D4;
+            --neon-green: #10B981;
+            --dark-bg: #0a0a0f;
+            --darker-bg: #050507;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --card-bg: rgba(30, 30, 40, 0.8);
         }
 
-        /* Cosmic Background Animation */
-        .cosmic-bg {
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            overflow: hidden;
+            background: linear-gradient(45deg, var(--dark-bg), var(--darker-bg));
         }
 
-        .star {
+        .bg-animation::before {
+            content: '';
             position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            animation: twinkle 3s infinite alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.3; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
-
-        .shooting-star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: linear-gradient(45deg, #fff, #4fc3f7);
-            border-radius: 50%;
-            animation: shoot 2s linear;
-        }
-
-        @keyframes shoot {
-            0% {
-                transform: translateX(-100px) translateY(100px);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(300px) translateY(-100px);
-                opacity: 0;
-            }
-        }
-
-        /* Header */
-        header {
-            background: rgba(15, 15, 35, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            position: sticky;
             top: 0;
-            z-index: 100;
-            border-bottom: 2px solid #4fc3f7;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite alternate;
         }
 
-        .header-content {
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -85,46 +82,104 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #4fc3f7, #9c27b0);
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .theme-toggle {
-            background: linear-gradient(45deg, #4fc3f7, #9c27b0);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.05);
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        .nav-links {
+            display: flex;
+            list-style: none;
             gap: 2rem;
         }
 
-        /* Card Styling */
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(236, 72, 153, 0.8)); }
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .location {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid var(--neon-purple);
+            border-radius: 25px;
+            color: var(--neon-purple);
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* Cards */
         .card {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(139, 92, 246, 0.3);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 1.5rem;
-            border: 1px solid rgba(79, 195, 247, 0.3);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -137,8 +192,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.1), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+            transition: left 0.5s ease;
         }
 
         .card:hover::before {
@@ -146,478 +201,645 @@
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(79, 195, 247, 0.2);
+            transform: translateY(-5px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
         }
 
-        .card-title {
-            font-size: 1.4rem;
+        .card h2 {
+            color: var(--neon-purple);
             margin-bottom: 1rem;
-            color: #4fc3f7;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-size: 2rem;
         }
 
-        /* Genshin Daily Check-in */
-        .genshin-card {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        /* Grid layouts */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
         }
 
-        .check-in-btn {
-            background: linear-gradient(45deg, #ffb74d, #ff9800);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 15px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin: 1rem 0;
-        }
-
-        .check-in-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255, 183, 77, 0.4);
-        }
-
-        .check-in-btn:disabled {
-            background: #666;
-            cursor: not-allowed;
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         }
 
         /* Music Section */
-        .music-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .artist-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .artist-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.8rem;
+        .artist-card {
+            background: var(--card-bg);
             border-radius: 10px;
+            padding: 1.5rem;
             text-align: center;
+            border: 1px solid rgba(6, 182, 212, 0.3);
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
-        .artist-item:hover {
-            background: rgba(255, 255, 255, 0.2);
+        .artist-card:hover {
+            border-color: var(--neon-blue);
             transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(6, 182, 212, 0.3);
         }
 
-        .spotify-link {
+        .artist-card h3 {
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+        }
+
+        .spotify-btn {
             display: inline-block;
-            background: #1db954;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(45deg, #1DB954, #1ed760);
             color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
             text-decoration: none;
-            margin: 1rem 0;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .spotify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(29, 185, 84, 0.4);
+        }
+
+        /* Friends Section */
+        .friend-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(236, 72, 153, 0.3);
             transition: all 0.3s ease;
         }
 
-        .spotify-link:hover {
-            background: #1ed760;
-            transform: scale(1.05);
+        .friend-card:hover {
+            border-color: var(--neon-pink);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
         }
 
-        /* Alien Stage */
-        .alien-stage-card {
-            background: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%);
+        .friend-card h3 {
+            color: var(--neon-pink);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .performance-quotes {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-            font-style: italic;
-            border-left: 4px solid #fc466b;
-        }
-
-        /* Japanese Culture */
-        .culture-card {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-            color: #333;
-        }
-
-        .culture-fact {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 1rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-        }
-
-        /* Mood Board Generator */
-        .mood-board-card {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            color: #333;
-        }
-
-        .mood-preview {
-            width: 100%;
-            height: 200px;
-            border-radius: 15px;
-            margin: 1rem 0;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+        .friend-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            margin: 0 auto 1rem auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 3rem;
-            transition: all 0.5s ease;
-        }
-
-        .generate-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 15px;
-            color: white;
+            font-size: 2rem;
             font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
         }
 
-        .generate-btn:hover {
-            transform: scale(1.05);
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
         }
 
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, #4fc3f7, #9c27b0);
-            color: white;
-            padding: 1rem 1.5rem;
+        .gallery-item {
+            aspect-ratio: 1;
+            background: var(--card-bg);
             border-radius: 10px;
-            z-index: 1000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .toast.show {
-            transform: translateX(0);
+        .gallery-item:hover {
+            border-color: var(--neon-green);
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.3);
         }
 
-        /* Responsive Design */
+        /* Alien Stage Section */
+        .alien-stage {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            border: 2px solid rgba(139, 92, 246, 0.5);
+        }
+
+        .alien-stage h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker-bg);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-                padding: 1rem;
+            .nav-links {
+                display: none;
             }
             
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 2rem 1rem;
             }
         }
 
-        /* Dark/Light Theme Toggle */
-        .light-theme {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
         }
 
-        .light-theme .card {
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
+        /* Quiz Styles */
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .quiz-btn {
+            padding: 1rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 10px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .quiz-btn:hover {
+            border-color: var(--neon-purple);
+            background: rgba(139, 92, 246, 0.2);
+            transform: translateX(10px);
+        }
+
+        .question {
+            display: none;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        .question h3 {
+            color: var(--neon-pink);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        #quiz-result h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #quiz-result p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--neon-purple), var(--neon-pink));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--neon-pink), var(--neon-blue));
         }
     </style>
 </head>
 <body>
-    <div class="cosmic-bg" id="cosmicBg"></div>
+    <div class="bg-animation"></div>
     
-    <header role="banner">
-        <div class="header-content">
-            <h1 class="logo">🌌 Iyad's Universe</h1>
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-                🌙 Cosmic Mode
-            </button>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">IYAD</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#music">Music</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#friends">Friends</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
-    <main class="container" role="main">
-        <!-- Genshin Impact Daily Check-in -->
-        <section class="card genshin-card" role="region" aria-labelledby="genshin-title">
-            <h2 class="card-title" id="genshin-title">⚔️ Genshin Daily Check-in</h2>
-            <p>Keep your adventure going, Traveler!</p>
-            <div id="resinStatus">Current Resin: 160/160 ⚡</div>
-            <div id="dailyStatus">Daily Domain: Not Completed</div>
-            <button class="check-in-btn" onclick="genshinCheckIn()" id="checkInBtn">
-                Complete Daily Check-in
-            </button>
-            <div id="lastCheckIn"></div>
-        </section>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Iyad's Universe</h1>
+            <p>Artist • Music Lover • Alien Stage Enthusiast</p>
+            <div class="location">📍 Yanbu, Saudi Arabia (it's fucking boring here, wish I could go back to Medina)</div>
+        </div>
+    </section>
 
-        <!-- Music Discovery -->
-        <section class="card music-card" role="region" aria-labelledby="music-title">
-            <h2 class="card-title" id="music-title">🎵 Your Music Universe</h2>
-            <div class="artist-grid">
-                <div class="artist-item" onclick="openArtist('https://open.spotify.com/artist/78rUTD7y6Cy67W1RVzYs7t?si=KfD6Ih3TRjasPLHXfyTQuA')">
-                    🎀 PinkPantheress
+    <section id="about">
+        <div class="card">
+            <h2>About Me</h2>
+            <p>Yo! I'm Iyad, currently stuck in Yanbu (seriously, it's so boring here, I miss Medina so much 😭). But hey, at least I have Alien Stage to keep me sane! I'm absolutely OBSESSED with this masterpiece by VIVINOS × QMENG - like, unhealthily obsessed. When I'm not crying over the latest episode, you'll find me doodling random stuff, vibing to music that probably makes no sense to anyone else, or annoying my friends Noah, Milo, and Riyadh with my latest conspiracy theories about the series.</p>
+            <p>I'm basically just a chaotic art kid who discovered the perfect blend of music, animation, and emotional trauma packaged into beautiful episodes. My life motto? If it doesn't make me question my existence while looking aesthetically pleasing, I don't want it! 🌌✨</p>
+        </div>
+
+        <div class="alien-stage">
+            <h2>🌌 Alien Stage Character Quiz</h2>
+            <p>Think you know which Alien Stage character matches your vibe? Let's find out! (Warning: Results may cause existential crisis)</p>
+            
+            <div id="quiz-container">
+                <div id="quiz-questions" style="display: none;">
+                    <div class="question active" data-question="0">
+                        <h3>What's your biggest fear?</h3>
+                        <div class="quiz-options">
+                            <button class="quiz-btn" data-answer="till">Being forgotten</button>
+                            <button class="quiz-btn" data-answer="ivan">Not being understood</button>
+                            <button class="quiz-btn" data-answer="mizi">Losing someone you love</button>
+                            <button class="quiz-btn" data-answer="sua">Being a burden to others</button>
+                        </div>
+                    </div>
+                    
+                    <div class="question" data-question="1">
+                        <h3>Pick your ideal way to spend a day:</h3>
+                        <div class="quiz-options">
+                            <button class="quiz-btn" data-answer="till">Making music alone in your room</button>
+                            <button class="quiz-btn" data-answer="ivan">Observing people from afar</button>
+                            <button class="quiz-btn" data-answer="mizi">Hanging out with friends</button>
+                            <button class="quiz-btn" data-answer="sua">Taking care of someone you care about</button>
+                        </div>
+                    </div>
+                    
+                    <div class="question" data-question="2">
+                        <h3>Your approach to expressing feelings:</h3>
+                        <div class="quiz-options">
+                            <button class="quiz-btn" data-answer="till">Through rebellious art</button>
+                            <button class="quiz-btn" data-answer="ivan">Keep them hidden, suffer in silence</button>
+                            <button class="quiz-btn" data-answer="mizi">Openly and honestly</button>
+                            <button class="quiz-btn" data-answer="sua">Through gentle actions</button>
+                        </div>
+                    </div>
+                    
+                    <div class="question" data-question="3">
+                        <h3>What motivates you most?</h3>
+                        <div class="quiz-options">
+                            <button class="quiz-btn" data-answer="till">Freedom and rebellion</button>
+                            <button class="quiz-btn" data-answer="ivan">Unrequited love</button>
+                            <button class="quiz-btn" data-answer="mizi">Hope and friendship</button>
+                            <button class="quiz-btn" data-answer="sua">Protecting others</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="artist-item" onclick="openArtist('https://open.spotify.com/artist/1dfeR4HaWDbWqFHLkxsg1d?si=ja7_Q2JrSPWFi83tPdXkXQ')">
-                    👑 Queen
+                
+                <div id="quiz-start">
+                    <button id="start-quiz-btn" class="spotify-btn" style="background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink)); font-size: 1.2rem; padding: 1rem 2rem;">Start Quiz</button>
                 </div>
-                <div class="artist-item" onclick="openArtist('https://open.spotify.com/artist/4Uc8Dsxct0oMqx0P6i60ea?si=u6KXNIdDRSW0xtuAW46MyA')">
-                    🌸 Conan Gray
-                </div>
-                <div class="artist-item" onclick="openArtist('https://open.spotify.com/artist/5mFBPisqWsuM2DaNRRKMNo?si=iqCvurDqQHW8G35lDPp0zQ')">
-                    💎 Rubyebye
-                </div>
-                <div class="artist-item" onclick="openArtist('https://open.spotify.com/artist/5lMia1loNJEa8ofqQkKFAp?si=OCMt6N7xRKi5rxYBHEg4iA')">
-                    🌙 AKUGETSU
+                
+                <div id="quiz-result" style="display: none; text-align: center;">
+                    <h3 id="result-character"></h3>
+                    <p id="result-description"></p>
+                    <button id="restart-quiz" class="spotify-btn" style="background: linear-gradient(45deg, var(--neon-blue), var(--neon-green)); margin-top: 1rem;">Take Quiz Again</button>
                 </div>
             </div>
-            <a href="https://open.spotify.com/playlist/37i9dQZF1EJFUOCoAqUBHv?si=74f7f24414fb4a41" 
-               target="_blank" class="spotify-link">
-                🎧 Iyad and Taha's Blend
-            </a>
-            <div id="currentlyPlaying">🎵 Discover your next favorite song!</div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Alien Stage Updates -->
-        <section class="card alien-stage-card" role="region" aria-labelledby="alien-title">
-            <h2 class="card-title" id="alien-title">👽 Alien Stage Live</h2>
-            <div class="performance-quotes" id="performanceQuote">
-                "The stage calls to those brave enough to answer..."
-            </div>
-            <button class="generate-btn" onclick="newPerformanceQuote()">
-                New Performance Quote
-            </button>
-            <div style="margin-top: 1rem;">
-                <strong>Latest Update:</strong> Season 2 theories brewing! 🌟
-            </div>
-        </section>
+    <section id="music">
+        <div class="card">
+            <h2>🎵 My Musical Universe</h2>
+            <p>Music is the soundtrack to my existence. From the experimental sounds of PinkPantheress to the legendary anthems of Queen, my taste spans across genres and generations. Each artist brings something unique to my cosmic playlist.</p>
+        </div>
 
-        <!-- Japanese Culture Facts -->
-        <section class="card culture-card" role="region" aria-labelledby="culture-title">
-            <h2 class="card-title" id="culture-title">🏯 Daily Japanese Culture</h2>
-            <div class="culture-fact" id="cultureFact">
-                Did you know? The word "karaoke" means "empty orchestra" in Japanese! 🎤
+        <div class="grid grid-2">
+            <div class="artist-card">
+                <h3>PinkPantheress</h3>
+                <p>Dreamy, nostalgic beats that transport me to another dimension</p>
+                <a href="https://open.spotify.com/artist/78rUTD7y6Cy67W1RVzYs7t?si=KfD6Ih3TRjasPLHXfyTQuA" class="spotify-btn" target="_blank">Listen on Spotify</a>
             </div>
-            <button class="generate-btn" onclick="newCultureFact()" style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4);">
-                Learn Something New
-            </button>
-        </section>
-
-        <!-- Mood Board Generator -->
-        <section class="card mood-board-card" role="region" aria-labelledby="mood-title">
-            <h2 class="card-title" id="mood-title">✨ Cosmic Mood Generator</h2>
-            <div class="mood-preview" id="moodPreview">
-                🌌
+            <div class="artist-card">
+                <h3>Queen</h3>
+                <p>Timeless rock anthems that fuel my creative energy</p>
+                <a href="https://open.spotify.com/artist/1dfeR4HaWDbWqFHLkxsg1d?si=ja7_Q2JrSPWFi83tPdXkXQ" class="spotify-btn" target="_blank">Listen on Spotify</a>
             </div>
-            <button class="generate-btn" onclick="generateMoodBoard()">
-                Generate New Vibe
-            </button>
-            <div id="moodDescription">Current Vibe: Cosmic Serenity</div>
-        </section>
-
-        <!-- Personal Stats -->
-        <section class="card" role="region" aria-labelledby="stats-title" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-            <h2 class="card-title" id="stats-title">📊 Your Universe Stats</h2>
-            <div id="statsDisplay">
-                <div>🎮 Days on Teyvat: <span id="genshinDays">1</span></div>
-                <div>🎵 Songs Discovered: <span id="songsCount">0</span></div>
-                <div>👽 Alien Stage Episodes: <span id="alienEpisodes">12</span></div>
-                <div>🏯 Culture Facts Learned: <span id="cultureCount">0</span></div>
+            <div class="artist-card">
+                <h3>Conan Gray</h3>
+                <p>Emotional storytelling through melodic indie pop</p>
+                <a href="https://open.spotify.com/artist/4Uc8Dsxct0oMqx0P6i60ea?si=u6KXNIdDRSW0xtuAW46MyA" class="spotify-btn" target="_blank">Listen on Spotify</a>
             </div>
-        </section>
-    </main>
+            <div class="artist-card">
+                <h3>rubyeye</h3>
+                <p>Atmospheric sounds that complement my artistic mood</p>
+                <a href="https://open.spotify.com/artist/5mFBPisqWsuM2DaNRRKMNo?si=iqCvurDqQHW8G35lDPp0zQ" class="spotify-btn" target="_blank">Listen on Spotify</a>
+            </div>
+            <div class="artist-card">
+                <h3>akugetsu</h3>
+                <p>Unique soundscapes that inspire my creativity</p>
+                <a href="https://open.spotify.com/artist/5lMia1loNJEa8ofqQkKFAp?si=OCMt6N7xRKi5rxYBHEg4iA" class="spotify-btn" target="_blank">Listen on Spotify</a>
+            </div>
+        </div>
 
-    <div class="toast" id="toast"></div>
+        <div class="card">
+            <h2>🎧 Our Spotify Blend</h2>
+            <p>Sometimes the best music comes from shared experiences. Check out our collaborative playlist that brings together our musical souls.</p>
+            <a href="https://open.spotify.com/playlist/37i9dQZF1EJFUOCoAqUBHv?si=74f7f24414fb4a41" class="spotify-btn" target="_blank">Listen to Our Blend</a>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="card">
+            <h2>🎨 Art Gallery</h2>
+            <p>Drawing is my way of bringing the cosmos to paper. Each piece tells a story, captures an emotion, or explores the beautiful darkness that Alien Stage has taught me to appreciate.</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <span style="color: var(--neon-green);">🎨 Artwork 1</span>
+            </div>
+            <div class="gallery-item">
+                <span style="color: var(--neon-green);">🎨 Artwork 2</span>
+            </div>
+            <div class="gallery-item">
+                <span style="color: var(--neon-green);">🎨 Artwork 3</span>
+            </div>
+            <div class="gallery-item">
+                <span style="color: var(--neon-green);">🎨 Artwork 4</span>
+            </div>
+            <div class="gallery-item">
+                <span style="color: var(--neon-green);">🎨 Artwork 5</span>
+            </div>
+            <div class="gallery-item">
+                <span style="color: var(--neon-green);">🎨 Artwork 6</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="friends">
+        <div class="card">
+            <h2>👥 My Cosmic Crew</h2>
+            <p>The people who make this journey through space and time meaningful. Noah, Milo, and Riyadh aren't just friends—they're the constellation that guides me through life's adventures.</p>
+        </div>
+
+        <div class="grid">
+            <div class="friend-card">
+                <div class="friend-avatar">N</div>
+                <h3>Noah</h3>
+                <p>A true companion on this cosmic journey. Noah brings wisdom and laughter to every moment we share, making even the darkest Alien Stage episodes feel lighter with his presence.</p>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">M</div>
+                <h3>Milo</h3>
+                <p>Creative soul and fellow artist. Milo understands the language of colors and emotions, and together we explore the artistic depths that Alien Stage has opened up for us.</p>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">R</div>
+                <h3>Riyadh</h3>
+                <p>The anchor of our group. Riyadh keeps us grounded while we reach for the stars, always there with support and the kind of friendship that transcends the ordinary.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="card">
+            <h2>🌟 Connect with Me</h2>
+            <p>Ready to join me on this cosmic journey? Whether you want to discuss the latest Alien Stage episode, share musical discoveries, or talk about art, I'm always excited to connect with fellow travelers in this vast universe.</p>
+            <p style="text-align: center; margin-top: 2rem;">
+                <span style="color: var(--neon-purple);">📧 Reach out through the cosmos</span><br>
+                <span style="color: var(--text-secondary);">From Yanbu, with love 💜</span>
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Iyad's Universe • Inspired by Alien Stage • Made with 💜 in Yanbu, KSA</p>
+    </footer>
 
     <script>
-        // Initialize cosmic background
-        function createStars() {
-            const cosmicBg = document.getElementById('cosmicBg');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.width = star.style.height = Math.random() * 3 + 1 + 'px';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                cosmicBg.appendChild(star);
-            }
-        }
-
-        function createShootingStar() {
-            const cosmicBg = document.getElementById('cosmicBg');
-            const shootingStar = document.createElement('div');
-            shootingStar.className = 'shooting-star';
-            shootingStar.style.left = Math.random() * 50 + '%';
-            shootingStar.style.top = Math.random() * 50 + '%';
-            cosmicBg.appendChild(shootingStar);
-            
-            setTimeout(() => {
-                cosmicBg.removeChild(shootingStar);
-            }, 2000);
-        }
-
-        // Toast notification system
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // Genshin Impact functionality
-        function genshinCheckIn() {
-            const now = new Date();
-            const today = now.toDateString();
-            const lastCheckIn = window.genshinData?.lastCheckIn;
-            
-            if (lastCheckIn === today) {
-                showToast('Already checked in today, Traveler! ⚔️');
-                return;
-            }
-            
-            // Store check-in data
-            window.genshinData = { lastCheckIn: today, days: (window.genshinData?.days || 0) + 1 };
-            
-            document.getElementById('checkInBtn').disabled = true;
-            document.getElementById('checkInBtn').textContent = '✅ Checked In Today!';
-            document.getElementById('lastCheckIn').textContent = `Last check-in: ${today}`;
-            document.getElementById('genshinDays').textContent = window.genshinData.days;
-            
-            showToast('Daily check-in complete! +60 Primogems 💎');
-            
-            // Reset button at midnight
-            const tomorrow = new Date(now);
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            tomorrow.setHours(0, 0, 0, 0);
-            const timeUntilReset = tomorrow.getTime() - now.getTime();
-            
-            setTimeout(() => {
-                document.getElementById('checkInBtn').disabled = false;
-                document.getElementById('checkInBtn').textContent = 'Complete Daily Check-in';
-            }, timeUntilReset);
-        }
-
-        // Music functionality
-        function openArtist(spotifyUrl) {
-            window.open(spotifyUrl, '_blank');
-            
-            const artistName = spotifyUrl.includes('78rUTD7y6Cy67W1RVzYs7t') ? 'PinkPantheress' :
-                              spotifyUrl.includes('1dfeR4HaWDbWqFHLkxsg1d') ? 'Queen' :
-                              spotifyUrl.includes('4Uc8Dsxct0oMqx0P6i60ea') ? 'Conan Gray' :
-                              spotifyUrl.includes('5mFBPisqWsuM2DaNRRKMNo') ? 'Rubyebye' : 'AKUGETSU';
-            
-            const messages = {
-                'PinkPantheress': 'Now vibing to PinkPantheress 🎀✨',
-                'Queen': 'We Will Rock You! 👑🎸',
-                'Conan Gray': 'Feeling those indie vibes 🌸💫',
-                'Rubyebye': 'Discovering hidden gems 💎🎵',
-                'AKUGETSU': 'Japanese vibes activated 🌙🎌'
-            };
-            
-            document.getElementById('currentlyPlaying').textContent = `🎵 ${messages[artistName]}`;
-            showToast(`Opening ${artistName} on Spotify! 🎵`);
-            
-            // Update song count
-            window.songsCount = (window.songsCount || 0) + 1;
-            document.getElementById('songsCount').textContent = window.songsCount;
-        }
-
-        // Alien Stage quotes
-        const alienQuotes = [
-            "The stage calls to those brave enough to answer...",
-            "In this cosmic performance, every note matters.",
-            "Survival isn't just about talent, it's about heart.",
-            "The universe watches as stars are born and fall.",
-            "Music transcends species, transcends worlds.",
-            "On this stage, we are all aliens to someone.",
-            "The spotlight reveals truth in the darkness.",
-            "Every performance could be your last... make it count."
-        ];
-
-        function newPerformanceQuote() {
-            const randomQuote = alienQuotes[Math.floor(Math.random() * alienQuotes.length)];
-            document.getElementById('performanceQuote').textContent = `"${randomQuote}"`;
-            showToast('New performance wisdom received! 👽');
-        }
-
-        // Japanese culture facts
-        const cultureFacts = [
-            "Did you know? The word 'karaoke' means 'empty orchestra' in Japanese! 🎤",
-            "Cherry blossom (sakura) season in Japan lasts only about 2 weeks! 🌸",
-            "Japan has over 6,800 islands, but only 430 are inhabited! 🏝️",
-            "The practice of forest bathing (shinrin-yoku) is scientifically proven to reduce stress! 🌲",
-            "Japanese trains are so punctual that being even 1 minute late requires an apology! 🚅",
-            "Kit-Kats in Japan come in over 300+ unique flavors! 🍫",
-            "The art of origami can be traced back to the 6th century! 📜",
-            "Japan has a whole island dedicated to rabbits called Okunoshima! 🐰"
-        ];
-
-        function newCultureFact() {
-            const randomFact = cultureFacts[Math.floor(Math.random() * cultureFacts.length)];
-            document.getElementById('cultureFact').textContent = randomFact;
-            showToast('Cultural knowledge expanded! 🏯');
-            
-            // Update culture count
-            window.cultureCount = (window.cultureCount || 0) + 1;
-            document.getElementById('cultureCount').textContent = window.cultureCount;
-        }
-
-        // Mood board generator
-        const moods = [
-            { emoji: '🌌', description: 'Cosmic Serenity', gradient: 'linear-gradient(45deg, #667eea, #764ba2)' },
-            { emoji: '🌸', description: 'Sakura Dreams', gradient: 'linear-gradient(45deg, #ff9a9e, #fecfef)' },
-            { emoji: '⚡', description: 'Electric Energy', gradient: 'linear-gradient(45deg, #4fc3f7, #9c27b0)' },
-            { emoji: '🔥', description: 'Passionate Fire', gradient: 'linear-gradient(45deg, #fc466b, #3f5efb)' },
-            { emoji: '🌙', description: 'Moonlit Mystery', gradient: 'linear-gradient(45deg, #1e3c72, #2a5298)' },
-            { emoji: '✨', description: 'Starlight Magic', gradient: 'linear-gradient(45deg, #f093fb, #f5576c)' },
-            { emoji: '🎵', description: 'Musical Harmony', gradient: 'linear-gradient(45deg, #a8edea, #fed6e3)' },
-            { emoji: '👽', description: 'Alien Stage Vibes', gradient: 'linear-gradient(45deg, #ff6b6b, #4ecdc4)' }
-        ];
-
-        function generateMoodBoard() {
-            const randomMood = moods[Math.floor(Math.random() * moods.length)];
-            const preview = document.getElementById('moodPreview');
-            
-            preview.textContent = randomMood.emoji;
-            preview.style.background = randomMood.gradient;
-            document.getElementById('moodDescription').textContent = `Current Vibe: ${randomMood.description}`;
-            
-            showToast(`New vibe generated: ${randomMood.description} ✨`);
-        }
-
-        // Theme toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            const toggle = document.querySelector('.theme-toggle');
-            const isLight = document.body.classList.contains('light-theme');
-            toggle.textContent = isLight ? '☀️ Light Mode' : '🌙 Cosmic Mode';
-        }
-
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', function() {
-            createStars();
-            setInterval(createShootingStar, 15000);
-            
-            // Initialize check-in status
-            const today = new Date().toDateString();
-            if (window.genshinData?.lastCheckIn === today) {
-                document.getElementById('checkInBtn').disabled = true;
-                document.getElementById('checkInBtn').textContent = '✅ Checked In Today!';
-            }
-            
-            showToast('Welcome to your universe, Iyad! 🌌');
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
+
+        // Add parallax effect to background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const bg = document.querySelector('.bg-animation::before');
+            if (bg) {
+                bg.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Gallery item click effect
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1.05)';
+                }, 100);
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+
+        // Add typing effect to hero text
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect when page loads
+        window.addEventListener('load', () => {
+            const heroTitle = document.querySelector('.hero-content h1');
+            const originalText = heroTitle.textContent;
+            typeWriter(heroTitle, originalText, 150);
+        });
+
+        // Add floating animation to cards
+        function addFloatingAnimation() {
+            const cards = document.querySelectorAll('.card, .friend-card, .artist-card');
+            cards.forEach((card, index) => {
+                card.style.animation = `float 6s ease-in-out infinite ${index * 0.5}s`;
+            });
+        }
+
+        // CSS for floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize floating animation
+        addFloatingAnimation();
+
+        // Add intersection observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply fade-in animation to all cards
+        document.querySelectorAll('.card, .friend-card, .artist-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+document.getElementById('upload-btn').addEventListener('click', () => {
+    document.getElementById('artwork-upload').click();
+});
+
+document.getElementById('artwork-upload').addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const gallery = document.getElementById('gallery-container');
+            const newItem = document.createElement('div');
+            newItem.classList.add('gallery-item', 'uploaded-artwork');
+            newItem.innerHTML = `<img src="${e.target.result}" alt="User artwork">`;
+            gallery.prepend(newItem);
+        };
+        reader.readAsDataURL(file);
+    }
+});
+const startBtn = document.getElementById('start-quiz-btn');
+const quizQuestions = document.getElementById('quiz-questions');
+const resultContainer = document.getElementById('quiz-result');
+const resultTitle = document.getElementById('result-character');
+const resultDesc = document.getElementById('result-description');
+const restartBtn = document.getElementById('restart-quiz');
+
+let currentQuestion = 0;
+let answers = {};
+
+const results = {
+    till: {
+        name: "Till",
+        desc: "You’re a rebellious soul with a passion for expressing truth through your art."
+    },
+    ivan: {
+        name: "Ivan",
+        desc: "You’re quiet and observant, carrying deep emotions and a longing to be understood."
+    },
+    mizi: {
+        name: "Mizi",
+        desc: "You shine with hope and warmth, always trying to uplift those around you."
+    },
+    sua: {
+        name: "Sua",
+        desc: "Gentle and caring, your love language is acts of service and silent support."
+    }
+};
+
+startBtn.addEventListener('click', () => {
+    startBtn.style.display = 'none';
+    quizQuestions.style.display = 'block';
+    showQuestion();
+});
+
+function showQuestion() {
+    const allQuestions = document.querySelectorAll('.question');
+    allQuestions.forEach(q => q.classList.remove('active'));
+    const current = document.querySelector(`.question[data-question="${currentQuestion}"]`);
+    if (current) current.classList.add('active');
+}
+
+document.querySelectorAll('.quiz-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const character = btn.getAttribute('data-answer');
+        answers[character] = (answers[character] || 0) + 1;
+        currentQuestion++;
+        if (currentQuestion < 4) {
+            showQuestion();
+        } else {
+            showResult();
+        }
+    });
+});
+
+restartBtn.addEventListener('click', () => {
+    currentQuestion = 0;
+    answers = {};
+    quizQuestions.style.display = 'block';
+    resultContainer.style.display = 'none';
+    showQuestion();
+});
+
+function showResult() {
+    quizQuestions.style.display = 'none';
+    resultContainer.style.display = 'block';
+    let topCharacter = Object.keys(answers).reduce((a, b) => answers[a] > answers[b] ? a : b);
+    resultTitle.textContent = results[topCharacter].name;
+    resultDesc.textContent = results[topCharacter].desc;
+}
+
     </script>
 </body>
 </html>
